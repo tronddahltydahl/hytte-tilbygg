@@ -199,7 +199,8 @@ export const hytte: Boks = {
     // 80×80 vindu på høyre gavelvegg, rett rundt hjørnet (z=4) fra den gule
     // inngangsdøra. Sitter på den frie delen av gavlen, utenfor tilbygget
     // (som slutter ved z=2.7). avstand måles fra bakkanten (z=0).
-    { type: "vindu", vegg: "hoyre", avstand: 3.0, bredde: 0.8, hoyde: 0.8, bunn: 1.0 },
+    // Bunn 1.5 gir overkant 2.30 — samme som de andre vinduene på hytta.
+    { type: "vindu", vegg: "hoyre", avstand: 3.0, bredde: 0.8, hoyde: 0.8, bunn: 1.5 },
   ],
 };
 
