@@ -376,10 +376,16 @@ function RomLabel({ rom }: { rom: RomType }) {
   const cx = meter(rom.x + rom.bredde / 2);
   const cy = meter(rom.z + rom.dybde / 2);
   const areal = (rom.bredde * rom.dybde).toFixed(2);
-  // Smalere rom = mindre font, så navnet får plass innenfor rommets bredde.
-  const trangt = rom.bredde < 1.5;
-  const navnFont = trangt ? 10 : 12;
-  const arealFont = trangt ? 9 : 11;
+  const arealTekst = `${areal} m²`;
+
+  // Skaler fonten til rommets bredde og tekstens lengde, så labelen holder
+  // seg innenfor veggene. ~0,6 × fontstørrelse er omtrentlig bredde per tegn.
+  // Tak (12/11) hindrer kjempefont i brede rom; gulv (7) holder den lesbar.
+  const tilgjengelig = rom.bredde * SKALA - 8; // px innvendig, minus litt luft
+  const passerFont = (tekst: string, maks: number) =>
+    Math.max(7, Math.min(maks, Math.floor(tilgjengelig / (tekst.length * 0.6))));
+  const navnFont = passerFont(rom.navn, 12);
+  const arealFont = passerFont(arealTekst, 11);
   return (
     <g>
       <text
@@ -399,7 +405,7 @@ function RomLabel({ rom }: { rom: RomType }) {
         fontSize={arealFont}
         fill="#57534e"
       >
-        {areal} m²
+        {arealTekst}
       </text>
     </g>
   );
