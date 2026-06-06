@@ -759,66 +759,114 @@ function GjerdeKomp({ gjerde }: { gjerde: GjerdeType }) {
   );
 }
 
-// Fjellsilhuett — en jagged 2D-kontur som står som en plakat langt borte.
-// Brukes som "Jotunheimen ca. 20 mil unna" gjennom badstuevinduet. Hytta
-// står på ca 850 moh, og toppene i Jotunheimen ligger 2300–2469 moh, så
-// reell vinkel over horisonten er liten (~0,5°). Vi overdriver litt for
-// at silhuetten skal være synlig i utsiktsbildet — typisk "kunstnerisk
-// dempet" Jotunheim-profil med markante Galdhøpiggen og Glittertind.
-function Fjellsilhuett() {
-  const geometri = useMemo(() => {
-    const shape = new THREE.Shape();
-    // Bred base — strekker seg langt utover synsfeltet for full horisont
-    shape.moveTo(-150, -3);
-    shape.lineTo(-150, 0);
-    const topper: Array<[number, number]> = [
-      [-135, 0.2],
-      [-122, 0.4],
-      [-110, 0.6],
-      [-98, 0.4],
-      [-86, 0.9],
-      [-75, 1.2],
-      [-65, 0.8],
-      [-56, 1.5],
-      [-48, 1.1],
-      [-40, 1.8],
-      [-32, 1.4],
-      [-25, 2.1],
-      [-18, 1.7],
-      [-12, 2.4], // Galdhøpiggen (2469 moh) — høyeste topp
-      [-7, 2.0],
-      [-2, 1.6],
-      [3, 1.9],
-      [9, 2.3], // Glittertind (2452 moh) — ofte snødekt
-      [15, 1.8],
-      [22, 2.0], // Store Skagastølstind (2405 moh) — taggete profil
-      [29, 1.5],
-      [36, 1.8],
-      [44, 1.3],
-      [52, 1.6],
-      [62, 1.0],
-      [72, 1.2],
-      [85, 0.7],
-      [98, 0.5],
-      [112, 0.4],
-      [125, 0.2],
-      [140, 0.1],
-      [150, 0],
-    ];
-    for (const [tx, ty] of topper) shape.lineTo(tx, ty);
-    shape.lineTo(150, -3);
-    shape.lineTo(-150, -3);
-    return new THREE.ShapeGeometry(shape);
-  }, []);
+// Bygger en flat fjell-kontur (ShapeGeometry i xy-planet) fra en liste
+// toppunkter [x, y]. Bunnen trekkes godt under horisonten (y = -4) så
+// rekka "står på" bakken uansett kameravinkel.
+function ridgeGeometri(topper: Array<[number, number]>) {
+  const shape = new THREE.Shape();
+  const xVenstre = topper[0][0];
+  const xHoyre = topper[topper.length - 1][0];
+  shape.moveTo(xVenstre, -4);
+  for (const [tx, ty] of topper) shape.lineTo(tx, ty);
+  shape.lineTo(xHoyre, -4);
+  shape.closePath();
+  return new THREE.ShapeGeometry(shape);
+}
 
+// Deterministisk jagget ås-profil (ingen Math.random → stabil mellom renders).
+// Summen av tre sinuser med ulik frekvens gir en naturlig ujevn fjellrekke.
+// Brukes til de bakre, anonyme rekkene; den fremste er håndtegnet under.
+function jaggetProfil(
+  amplitude: number,
+  basis: number,
+  frekvens: number,
+  faser: [number, number, number],
+): Array<[number, number]> {
+  const pts: Array<[number, number]> = [];
+  for (let x = -150; x <= 150; x += 4) {
+    const v =
+      0.55 * Math.sin(x * frekvens + faser[0]) +
+      0.3 * Math.sin(x * frekvens * 2.3 + faser[1]) +
+      0.18 * Math.sin(x * frekvens * 5.1 + faser[2]);
+    pts.push([x, Math.max(0, basis + amplitude * v)]);
+  }
+  return pts;
+}
+
+// Fjellkjede-horisont — tre fjellrekker bak hverandre som "Jotunheimen ca.
+// 20 mil unna" sett gjennom badstuevinduet. Hytta står på ca 850 moh, og
+// toppene ligger 2300–2469 moh, så reell vinkel over horisonten er liten
+// (~0,5°). Vi overdriver litt så silhuetten blir synlig.
+//
+// Lengst bort = lysest (atmosfærisk dis, nær himmelfargen #dbe2e8), nærmest
+// = mørkest. De ligger på ulik z, så three.js' dybde-test lar de nære
+// rekkene dekke de fjerne der de overlapper — det gir dybde i horisonten.
+function Fjellsilhuett() {
+  // Fremste rekke: håndtegnet Jotunheim-profil med navngitte topper.
+  const fremste = useMemo(
+    () =>
+      ridgeGeometri([
+        [-135, 0.2],
+        [-122, 0.4],
+        [-110, 0.6],
+        [-98, 0.4],
+        [-86, 0.9],
+        [-75, 1.2],
+        [-65, 0.8],
+        [-56, 1.5],
+        [-48, 1.1],
+        [-40, 1.8],
+        [-32, 1.4],
+        [-25, 2.1],
+        [-18, 1.7],
+        [-12, 2.4], // Galdhøpiggen (2469 moh) — høyeste topp
+        [-7, 2.0],
+        [-2, 1.6],
+        [3, 1.9],
+        [9, 2.3], // Glittertind (2452 moh) — ofte snødekt
+        [15, 1.8],
+        [22, 2.0], // Store Skagastølstind (2405 moh) — taggete profil
+        [29, 1.5],
+        [36, 1.8],
+        [44, 1.3],
+        [52, 1.6],
+        [62, 1.0],
+        [72, 1.2],
+        [85, 0.7],
+        [98, 0.5],
+        [112, 0.4],
+        [125, 0.2],
+        [140, 0.1],
+        [150, 0],
+      ]),
+    [],
+  );
+  // Bakre rekker: høy basis så toppene titter opp i dalene mellom de fremste.
+  const midtre = useMemo(
+    () => ridgeGeometri(jaggetProfil(1.1, 1.0, 0.05, [0.4, 2.1, 1.2])),
+    [],
+  );
+  const bakerste = useMemo(
+    () => ridgeGeometri(jaggetProfil(0.8, 0.8, 0.07, [1.9, 0.3, 2.6])),
+    [],
+  );
+
+  // meshBasicMaterial = ikke påvirket av lys, gir flat silhuett-utseende.
   return (
-    // z=80: lenger borte enn bakke-flaten (slutter på z=40) — gir
-    // "horisont"-effekt, og lavere vinkel passer 20 mil avstand.
-    <mesh position={[2.7, 0, 80]} geometry={geometri}>
-      {/* meshBasicMaterial = ikke påvirket av lys, gir flat silhuett-utseende.
-          Lys, dempet blågrå = atmosfærisk perspektiv ("dis") for fjern silhuett. */}
-      <meshBasicMaterial color="#8593a5" side={THREE.DoubleSide} />
-    </mesh>
+    <group position={[2.7, 0, 0]}>
+      {/* Bakerst (z=96) — lysest, nesten oppløst i disen */}
+      <mesh position={[0, 0, 96]} geometry={bakerste}>
+        <meshBasicMaterial color="#c2ccd7" side={THREE.DoubleSide} />
+      </mesh>
+      {/* Midtre (z=88) */}
+      <mesh position={[0, 0, 88]} geometry={midtre}>
+        <meshBasicMaterial color="#a3b0c0" side={THREE.DoubleSide} />
+      </mesh>
+      {/* Fremst (z=80) — mørkest, tydeligste profil */}
+      <mesh position={[0, 0, 80]} geometry={fremste}>
+        <meshBasicMaterial color="#7e8da0" side={THREE.DoubleSide} />
+      </mesh>
+    </group>
   );
 }
 
