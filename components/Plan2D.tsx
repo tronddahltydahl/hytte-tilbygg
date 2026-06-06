@@ -223,7 +223,7 @@ function MobelTegning({ mobel }: { mobel: Mobel }) {
       {visLabel && (
         <text
           x={x + w / 2}
-          y={y + h / 2 + 3}
+          y={y + h / 2 + 3 + (mobel.etikettDz ?? 0) * SKALA}
           textAnchor="middle"
           fontSize={8}
           fill="#1c1917"

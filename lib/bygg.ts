@@ -404,6 +404,9 @@ export type Mobel = {
   farge: string;
   form?: "boks" | "sylinder";
   metall?: boolean; // gir blank/metallisk overflate i 3D
+  // Flytter 2D-etiketten opp/ned (meter langs z) når to møbler ligger oppå
+  // hverandre og navnene ellers kolliderer. Negativ = opp, positiv = ned.
+  etikettDz?: number;
 };
 
 // ----- Design-pakker -----
@@ -604,6 +607,7 @@ export const tilbyggetMobler: Mobel[] = [
     dybde: 1.2,
     hoyde: 0.45,
     farge: "#d4ba8a",
+    etikettDz: 0.35, // skyv ned i den nedre halvdelen, vekk fra øvre benk
   },
   {
     navn: "Badstubenk øvre",
