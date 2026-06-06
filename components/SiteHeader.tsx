@@ -66,6 +66,13 @@ export default function SiteHeader() {
               </Link>
             );
           })}
+          <a
+            href="/badstue-materialliste.xlsx"
+            download
+            className="rounded-md px-3 py-1.5 text-sm font-medium text-stone-600 hover:bg-stone-100 hover:text-stone-900"
+          >
+            Materialliste
+          </a>
         </div>
       </nav>
     </header>
