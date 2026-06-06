@@ -225,7 +225,7 @@ function MobelTegning({ mobel }: { mobel: Mobel }) {
           x={x + w / 2}
           y={y + h / 2 + 3}
           textAnchor="middle"
-          fontSize={9}
+          fontSize={8}
           fill="#1c1917"
         >
           {mobel.navn}
@@ -384,8 +384,8 @@ function RomLabel({ rom }: { rom: RomType }) {
   const tilgjengelig = rom.bredde * SKALA - 8; // px innvendig, minus litt luft
   const passerFont = (tekst: string, maks: number) =>
     Math.max(7, Math.min(maks, Math.floor(tilgjengelig / (tekst.length * 0.6))));
-  const navnFont = passerFont(rom.navn, 12);
-  const arealFont = passerFont(arealTekst, 11);
+  const navnFont = passerFont(rom.navn, 10);
+  const arealFont = passerFont(arealTekst, 8.5);
   return (
     <g>
       <text
