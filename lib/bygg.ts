@@ -210,9 +210,10 @@ export const tilbygg: Boks = {
   farge: "#2b2826", // samme dempete sort som hovedhytta
   tak: { vinkel: 25, retning: "langs", utstikk: 0.4 },
   apninger: [
-    // Glass-terrassedør på fronten inn til Relax, plassert nær hovedhytta (x=13).
-    // Samme størrelse som hyttas terrassedør, bunn på tilbygg-terrassens nivå.
-    { type: "glassdor", vegg: "front", avstand: 0.3, bredde: 0.8, hoyde: 2.0, bunn: 0.12 },
+    // Glass-terrassedør på fronten inn til Relax, plassert på høyre side av
+    // rommet (mot innerveggen ved x=2.2). Samme størrelse som hyttas
+    // terrassedør, bunn på tilbygg-terrassens nivå.
+    { type: "glassdor", vegg: "front", avstand: 1.1, bredde: 0.8, hoyde: 2.0, bunn: 0.12 },
     // Liggende vindu i badstuen — 160 × 80 cm, midtstilt i badstu-rommet
     // (x=2.2–4.2 → vindu x=2.4–4.0), 20 cm til hver vegg-linje.
     // Topp på y=2.12 (flukter med terrassedøra), bunn 1.32 → høyde 0.8.
@@ -386,6 +387,9 @@ export type Rom = {
   z: number;
   bredde: number;
   dybde: number;
+  // Flytter 2D-etiketten opp/ned (meter langs z) når den ellers kolliderer
+  // med møbler i rommet. Negativ = opp, positiv = ned.
+  etikettDz?: number;
 };
 
 // Et innendørs møbel — en enkel boks (eller sylinder) med posisjon,
@@ -574,7 +578,8 @@ export const innerveggBadstueSmorebod: Levegg = {
 
 export const tilbyggetRom: Rom[] = [
   { navn: "Relax", x: 0, z: 0, bredde: 2.2, dybde: 2.7 },
-  { navn: "Badstue", x: 2.2, z: 0, bredde: 2.0, dybde: 2.7 },
+  // Etiketten skyves ned så den ikke kolliderer med badstubenkene (z 0–1,2).
+  { navn: "Badstue", x: 2.2, z: 0, bredde: 2.0, dybde: 2.7, etikettDz: 0.4 },
   { navn: "Smørebod", x: 4.2, z: 0, bredde: 1.2, dybde: 2.7 },
 ];
 

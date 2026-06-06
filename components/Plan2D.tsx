@@ -374,7 +374,7 @@ function TerrasseTegning({ terrasse }: { terrasse: TerrasseType }) {
 
 function RomLabel({ rom }: { rom: RomType }) {
   const cx = meter(rom.x + rom.bredde / 2);
-  const cy = meter(rom.z + rom.dybde / 2);
+  const cy = meter(rom.z + rom.dybde / 2) + (rom.etikettDz ?? 0) * SKALA;
   const areal = (rom.bredde * rom.dybde).toFixed(2);
   const arealTekst = `${areal} m²`;
 
