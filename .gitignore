@@ -1,0 +1,26 @@
+# Avhengigheter
+/node_modules
+
+# Bygg-output
+/.next/
+/out/
+/build
+
+# Miljøvariabler
+.env
+.env.*
+.env*.local
+
+# Logg-filer
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS / editor
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+.vscode/
+
+# Claude Code lokale innstillinger
+.claude/settings.local.json

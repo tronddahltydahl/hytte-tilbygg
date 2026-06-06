@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<title>Badstue med smørebod + overbygg — Tekniske tegninger</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 24px; background: #f4f4f2; color: #222; }
+  .sheet { background: #fff; max-width: 1300px; margin: 0 auto 24px; padding: 28px 36px; border: 1px solid #ccc;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05); page-break-after: always; }
+  .titleblock { display: flex; justify-content: space-between; align-items: flex-end;
+    border-bottom: 2px solid #222; padding-bottom: 10px; margin-bottom: 20px; }
+  .titleblock h1 { margin: 0; font-size: 22px; letter-spacing: 0.5px; }
+  .titleblock .meta { font-size: 12px; text-align: right; line-height: 1.5; color: #555; }
+  h2 { font-size: 16px; margin: 0 0 10px 0; padding: 4px 10px;
+    background: #222; color: #fff; display: inline-block; letter-spacing: 0.5px; }
+  .drawing { background: #fff; border: 1px solid #ddd; padding: 16px; margin-bottom: 28px; }
+  svg { display: block; width: 100%; height: auto; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .notes { background: #e6f2e6; border-left: 4px solid #5a8a4a;
+    padding: 10px 14px; font-size: 13px; line-height: 1.5; margin: 18px 0; }
+  table.dims { border-collapse: collapse; font-size: 13px; width: 100%; }
+  table.dims th, table.dims td { border: 1px solid #ccc; padding: 6px 10px; text-align: left; }
+  table.dims th { background: #efefed; }
+  .caption { text-align: center; font-size: 12px; color: #555; margin-top: 6px; font-style: italic; }
+
+  .inner { fill: #fafafa; stroke: #444; stroke-width: 0.7; }
+  .hatch-wall { fill: url(#hatch-wall); stroke: #222; stroke-width: 1; }
+  .overbygg-floor { fill: #f4ece0; stroke: #8b6f4e; stroke-width: 0.8; stroke-dasharray: 5 3; }
+  .post { fill: #6b4e26; stroke: #222; stroke-width: 1; }
+  .hytte { fill: #c9b890; stroke: #8b6f4e; stroke-width: 1.5; }
+  .dim { stroke: #0a5ca8; stroke-width: 0.8; fill: none; }
+  .dim-text { font-family: Arial, sans-serif; font-size: 11px; fill: #0a5ca8; }
+  .label { font-family: Arial, sans-serif; font-size: 13px; fill: #222; }
+  .label-small { font-family: Arial, sans-serif; font-size: 10px; fill: #444; }
+  .roof { fill: #8b6f4e; stroke: #222; stroke-width: 1; }
+  .cladding { fill: #d9b78a; stroke: #222; stroke-width: 0.8; }
+  .ground { fill: #6b8e5a; stroke: #3d5a2c; stroke-width: 1; }
+  .door { fill: #8b5a2b; stroke: #222; stroke-width: 0.8; }
+  .window { fill: #c8e0f0; stroke: #222; stroke-width: 0.8; }
+  .bench-lower { fill: #e6d2a6; stroke: #6b4e26; stroke-width: 0.8; }
+  .bench-upper { fill: #c9a872; stroke: #6b4e26; stroke-width: 1; }
+  .stove { fill: #444; stroke: #111; stroke-width: 1; }
+  .northarrow { fill: #222; }
+  .centerline { stroke: #888; stroke-width: 0.5; stroke-dasharray: 4 2; fill: none; }
+  .sky { fill: #e8f2f8; }
+</style>
+</head>
+<body>
+
+<!-- ============ ARK 1 — PLANTEGNING ============ -->
+<div class="sheet">
+  <div class="titleblock">
+    <h1>Badstue med smørebod + overbygg (mot hytta) — Plantegning</h1>
+    <div class="meta">
+      <div>Byggherre: Trond Dahl</div>
+      <div>Tegn.nr: A-01 | Målestokk 1:50 (ca)</div>
+      <div>Rev: H | Dato: 2026-04-17</div>
+    </div>
+  </div>
+
+  <h2>Plan — sett ovenfra (hytta — overbygg — badstue)</h2>
+  <div class="drawing">
+    <svg viewBox="0 0 1300 540" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="hatch-wall" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+          <rect width="6" height="6" fill="#d0d0d0"/>
+          <line x1="0" y1="0" x2="0" y2="6" stroke="#555" stroke-width="1"/>
+        </pattern>
+        <pattern id="hatch-overbygg" patternUnits="userSpaceOnUse" width="10" height="10" patternTransform="rotate(45)">
+          <rect width="10" height="10" fill="#f4ece0"/>
+          <line x1="0" y1="0" x2="0" y2="10" stroke="#c9b890" stroke-width="0.8"/>
+        </pattern>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#0a5ca8"/>
+        </marker>
+        <marker id="arrow-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M10,0 L0,5 L10,10 z" fill="#0a5ca8"/>
+        </marker>
+      </defs>
+
+      <!-- HYTTA indikator (ved x=60..100, y=90..459) -->
+      <rect x="30" y="90" width="70" height="369" class="hytte" opacity="0.6"/>
+      <text x="65" y="270" class="label" text-anchor="middle" font-weight="bold" transform="rotate(-90, 65, 270)">HYTTA</text>
+
+      <!-- OVERBYGG-område (x=100..550) -->
+      <rect x="100" y="109.5" width="450" height="330" fill="url(#hatch-overbygg)" stroke="none"/>
+
+      <!-- Overbygg TETT NORDVEGG (hatched) - del av en kontinuerlig nordvegg -->
+      <rect x="100" y="90" width="450" height="19.5" class="hatch-wall"/>
+
+      <!-- Overbygg åpen syd-side: tegnes som stiplet linje -->
+      <line x1="100" y1="439.5" x2="550" y2="439.5" stroke="#6b4e26" stroke-width="1.5" stroke-dasharray="8 4"/>
+
+      <!-- INGEN POST - sydbjelke spenner fritt 3 m -->
+      <rect x="100" y="432" width="450" height="15" fill="#6b4e26" opacity="0.5"/>
+      <text x="325" y="472" class="label-small" text-anchor="middle" font-weight="bold" fill="#6b4e26">Sydbjelke 2×48×198 (koblet)</text>
+      <text x="325" y="484" class="label-small" text-anchor="middle" fill="#6b4e26">eller limtre GL28c 90×270 — fritt spenn 3 m</text>
+
+      <!-- Attachments-indikatorer -->
+      <path d="M 100 230 L 90 230" stroke="#a00" stroke-width="1.5" fill="none"/>
+      <path d="M 100 310 L 90 310" stroke="#a00" stroke-width="1.5" fill="none"/>
+      <text x="85" y="275" class="label-small" text-anchor="end" fill="#a00" font-weight="bold">Festes i</text>
+      <text x="85" y="287" class="label-small" text-anchor="end" fill="#a00" font-weight="bold">hyttevegg</text>
+
+      <!-- Overbygg labels -->
+      <text x="325" y="200" class="label" text-anchor="middle" font-weight="bold" font-size="15">OVERBYGG</text>
+      <text x="325" y="218" class="label-small" text-anchor="middle">Åpent takoverbygg over inngangsparti</text>
+      <text x="325" y="232" class="label-small" text-anchor="middle">3000 × 2460 mm</text>
+      <text x="210" y="99" class="label-small" text-anchor="middle" fill="#555">← tett nordvegg →</text>
+
+      <!-- Traffic path indicator -->
+      <path d="M 130 380 L 500 380" stroke="#5a8a4a" stroke-width="1.5" stroke-dasharray="3 3" fill="none" marker-end="url(#arrow)"/>
+      <text x="315" y="395" class="label-small" text-anchor="middle" fill="#5a8a4a">gangvei hytta → badstue</text>
+
+      <!-- ============ BADSTUE-BYGG (x=550..1249) ============ -->
+      <!-- Bygget: utv 550..1249 (699 px = 466 cm). Innv 569.5..1229.5 -->
+      <path d="M 550 90 L 1249 90 L 1249 459 L 550 459 Z
+               M 569.5 109.5 L 569.5 439.5 L 1229.5 439.5 L 1229.5 109.5 Z"
+            class="hatch-wall" fill-rule="evenodd"/>
+
+      <!-- Mellomvegg ved smorebod+250cm: 569.5+375 = 944.5 -->
+      <rect x="944.5" y="109.5" width="15" height="330" class="hatch-wall"/>
+
+      <rect x="569.5" y="109.5" width="375" height="330" class="inner"/>
+      <rect x="959.5" y="109.5" width="270" height="330" class="inner"/>
+
+      <!-- Benker (shifted +450) -->
+      <rect x="959.5" y="109.5" width="270" height="180" class="bench-lower"/>
+      <rect x="959.5" y="109.5" width="270" height="90" class="bench-upper"/>
+      <line x1="959.5" y1="199.5" x2="1229.5" y2="199.5" stroke="#6b4e26" stroke-width="0.6" stroke-dasharray="3 2"/>
+
+      <text x="1094.5" y="150" class="label" text-anchor="middle" font-weight="bold">Benk oppe</text>
+      <text x="1094.5" y="165" class="label-small" text-anchor="middle">60 cm × 180 cm</text>
+      <text x="1094.5" y="240" class="label" text-anchor="middle" font-weight="bold">Benk nede</text>
+      <text x="1094.5" y="255" class="label-small" text-anchor="middle">120 × 180 cm</text>
+
+      <!-- Ovn flyttet til SE-hjørnet i badstuen (høyre-framre hjørne) -->
+      <circle cx="1188" cy="398" r="34" class="stove"/>
+      <text x="1188" y="402" class="label-small" text-anchor="middle" fill="#fff" font-weight="bold">Ovn</text>
+      <line x1="1188" y1="364" x2="1188" y2="320" stroke="#6b4e26" stroke-width="0.5" stroke-dasharray="2 2"/>
+      <text x="1188" y="315" class="label-small" text-anchor="middle" fill="#6b4e26">ø45 m/ varmeskjerm</text>
+
+      <!-- Ytterdør i badstue vestvegg (shifted: x=550..569.5) -->
+      <path d="M 550 214.5 L 569.5 214.5 L 569.5 334.5 L 550 334.5 Z" fill="#fff" stroke="#fff" stroke-width="3"/>
+      <line x1="550" y1="214.5" x2="569.5" y2="214.5" stroke="#222" stroke-width="1"/>
+      <line x1="550" y1="334.5" x2="569.5" y2="334.5" stroke="#222" stroke-width="1"/>
+      <path d="M 569.5 214.5 L 689.5 214.5" stroke="#8b5a2b" stroke-width="3"/>
+      <path d="M 569.5 214.5 A 120 120 0 0 1 689.5 334.5" fill="none" stroke="#8b5a2b" stroke-width="0.8" stroke-dasharray="2,2"/>
+      <text x="500" y="274" class="label-small" text-anchor="end" font-weight="bold">YTTERDØR 80×200</text>
+      <text x="500" y="287" class="label-small" text-anchor="end">(under overbygg)</text>
+
+      <!-- Vindu smørebod i sør -->
+      <rect x="706" y="439.5" width="90" height="19.5" class="window"/>
+      <line x1="751" y1="439.5" x2="751" y2="459" stroke="#222" stroke-width="0.5"/>
+      <text x="751" y="476" class="label-small" text-anchor="middle">Vindu 60×150</text>
+
+      <!-- Badstuedør i mellomvegg -->
+      <path d="M 944.5 335 L 959.5 335 L 959.5 425 L 944.5 425 Z" fill="#fff" stroke="#fff" stroke-width="3"/>
+      <line x1="944.5" y1="335" x2="959.5" y2="335" stroke="#222" stroke-width="1"/>
+      <line x1="944.5" y1="425" x2="959.5" y2="425" stroke="#222" stroke-width="1"/>
+      <path d="M 952 335 A 90 90 0 0 1 952 425" fill="none" stroke="#8b5a2b" stroke-width="1" stroke-dasharray="2,2"/>
+      <line x1="952" y1="335" x2="952" y2="425" stroke="#8b5a2b" stroke-width="3"/>
+
+      <!-- Vindu badstue -->
+      <rect x="1055.5" y="439.5" width="90" height="19.5" class="window"/>
+      <line x1="1100.5" y1="439.5" x2="1100.5" y2="459" stroke="#222" stroke-width="0.5"/>
+      <text x="1100.5" y="476" class="label-small" text-anchor="middle">Vindu 60×150</text>
+
+      <text x="757" y="370" class="label" text-anchor="middle" font-weight="bold">SMØREBOD / RELAX</text>
+      <text x="757" y="388" class="label-small" text-anchor="middle">5,5 m² innv.</text>
+
+      <text x="1094.5" y="360" class="label" text-anchor="middle" font-weight="bold">BADSTUE</text>
+      <text x="1094.5" y="378" class="label-small" text-anchor="middle">3,96 m² innv.</text>
+
+      <!-- Dimensjoner -->
+      <line x1="100" y1="60" x2="550" y2="60" class="dim" marker-start="url(#arrow-start)" marker-end="url(#arrow)"/>
+      <text x="325" y="54" class="dim-text" text-anchor="middle" font-weight="bold">3000 (overbygg)</text>
+
+      <line x1="550" y1="60" x2="1249" y2="60" class="dim" marker-start="url(#arrow-start)" marker-end="url(#arrow)"/>
+      <text x="899.5" y="54" class="dim-text" text-anchor="middle" font-weight="bold">4660 (bygg)</text>
+
+      <line x1="100" y1="40" x2="1249" y2="40" class="dim" marker-start="url(#arrow-start)" marker-end="url(#arrow)"/>
+      <text x="674.5" y="34" class="dim-text" text-anchor="middle" font-weight="bold">7660 mm TOTALT</text>
+
+      <line x1="569.5" y1="80" x2="944.5" y2="80" class="dim" marker-start="url(#arrow-start)" marker-end="url(#arrow)"/>
+      <text x="757" y="76" class="dim-text" text-anchor="middle">2500 innv</text>
+      <line x1="959.5" y1="80" x2="1229.5" y2="80" class="dim" marker-start="url(#arrow-start)" marker-end="url(#arrow)"/>
+      <text x="1094.5" y="76" class="dim-text" text-anchor="middle">1800 innv</text>
+
+      <line x1="1275" y1="90" x2="1275" y2="459" class="dim" marker-start="url(#arrow-start)" marker-end="url(#arrow)"/>
+      <text x="1290" y="274" class="dim-text" text-anchor="middle" font-weight="bold" transform="rotate(90, 1290, 274)">2460 mm</text>
+
+      <!-- Nord-pil -->
+      <g transform="translate(60,50)">
+        <polygon points="0,-25 7,8 0,3 -7,8" class="northarrow"/>
+        <text x="0" y="25" class="label" text-anchor="middle" font-weight="bold">N</text>
+      </g>
+
+      <!-- Tak-retning indikator -->
+      <g transform="translate(1260, 270)">
+        <path d="M 0 90 L 0 -90" stroke="#a00" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+        <text x="-5" y="-100" class="label-small" fill="#a00" font-weight="bold" text-anchor="end">LAV (bak)</text>
+        <text x="-5" y="108" class="label-small" fill="#a00" font-weight="bold" text-anchor="end">HØY (front)</text>
+        <text x="8" y="0" class="label-small" fill="#a00">fall 10°</text>
+      </g>
+
+      <!-- Snitt-linjer -->
+      <line x1="1094.5" y1="70" x2="1094.5" y2="495" class="centerline"/>
+      <text x="1094.5" y="80" class="label-small" text-anchor="middle" fill="#a00" font-weight="bold">A</text>
+      <text x="1094.5" y="509" class="label-small" text-anchor="middle" fill="#a00" font-weight="bold">A</text>
+
+      <line x1="325" y1="70" x2="325" y2="495" class="centerline"/>
+      <text x="325" y="80" class="label-small" text-anchor="middle" fill="#0077aa" font-weight="bold">B</text>
+      <text x="325" y="509" class="label-small" text-anchor="middle" fill="#0077aa" font-weight="bold">B</text>
+
+      <text x="674.5" y="520" class="label-small" text-anchor="middle">FRONT (syd)</text>
+    </svg>
+    <div class="caption">Plantegning — overbygg 3 m mot hytta med tett nordvegg og åpen sydside. 1 støttepost i midten av åpen side. Festes til hytteveggen i vest.</div>
+  </div>
+
+  <table class="dims">
+    <tr><th colspan="2">Nøkkelmål (rev. G)</th></tr>
+    <tr><td>Total plot (inkl. overbygg)</td><td>7660 × 2460 mm</td></tr>
+    <tr><td>Badstue-bygg utv.</td><td>4660 × 2460 mm</td></tr>
+    <tr><td><strong>Overbygg</strong></td><td><strong>3000 × 2460 mm (7,4 m²)</strong></td></tr>
+    <tr><td>Innv. takhøyde foran / bak</td><td>2400 / 2010 mm (badstue + overbygg)</td></tr>
+    <tr><td>Utv. vegghøyde foran / bak</td><td>2450 / 2020 mm</td></tr>
+    <tr><td>Takvinkel</td><td>10° (samme takplan over både bygg og overbygg)</td></tr>
+    <tr><td><strong>Overbygg nordvegg</strong></td><td>Tett, bindingsverk 48×98 + iso + kledning (som bygget)</td></tr>
+    <tr><td><strong>Overbygg vestside</strong></td><td>Festes i hyttevegg (beslag/svill)</td></tr>
+    <tr><td><strong>Overbygg sydside</strong></td><td><strong>Åpen uten post</strong>. Sydbjelke <strong>2×48×198 C24 koblet</strong> (el. limtre GL28c 90×270) — fritt spenn 3 m</td></tr>
+    <tr><td>Takbjelker (450 kg/m² snø)</td><td>48×148 C24 c/c 500 mm — fortsetter over overbygg (spenn 2,46 m)</td></tr>
+    <tr><td>Takutstikk</td><td>300 mm foran/bak, vindskier med 400 mm overheng på sidene</td></tr>
+    <tr><td>Fundament</td><td><strong>6 støpte sokler under badstuebygget</strong> (overbygget står på eksisterende terrasse — ingen nye sokler)</td></tr>
+    <tr><td>Gulv under overbygg</td><td>Eksisterende terrassebord (ingen nytt gulv)</td></tr>
+    <tr><td>Kobling mot hytta</td><td>Beslag felt inn i hyttas kledning (tak- og veggbeslag for tetting)</td></tr>
+    <tr><td>Utv. kledning</td><td><strong>Stående tømmermannspanel 22 mm</strong> (trykkimpregnert eller malt)</td></tr>
+    <tr><td>Taktekking</td><td><strong>Asfalt-shingel</strong> på taktro 22 mm + bitumen undertak-papp</td></tr>
+    <tr><td>Plassering ovn</td><td><strong>SE-hjørne i badstuen</strong> (høyre-framre hjørne, m/ varmeskjerm)</td></tr>
+  </table>
+
+  <h2 style="margin-top:18px;">Konstruksjonsdetaljer — vegg og tak</h2>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px;">
+    <table class="dims">
+      <tr><th colspan="2">VEGG (fra innv. til utv.)</th></tr>
+      <tr><td>1</td><td>Innv. kledning — osp (badstue) / furu (smørebod) 15 mm</td></tr>
+      <tr><td>2</td><td>Dampsperre — <strong>aluminiumsfolie</strong> (badstue) / 0,15 mm PE (smørebod)</td></tr>
+      <tr><td>3</td><td>Isolasjon — mineralull 48 mm (i stender)</td></tr>
+      <tr><td>4</td><td>Bindingsverk — 48×98 C24, c/c 600 mm</td></tr>
+      <tr><td>5</td><td><strong>Vindsperre</strong> — 9 mm vindtettplate el. diffusjonsåpen duk</td></tr>
+      <tr><td>6</td><td><strong>Klimaspalte</strong> — 23 mm horisontale lekter (fordi panel er stående)</td></tr>
+      <tr><td>7</td><td>Utv. kledning — stående tømmermannspanel 22 mm</td></tr>
+      <tr><td colspan="2" style="background:#f4f7f0;"><strong>Total veggtykkelse:</strong> ca. 145 mm</td></tr>
+      <tr><td colspan="2" style="background:#f4f7f0;"><strong>Lufting:</strong> klimaspalte åpen i bunn (ved svill) og i topp (under takutstikk), mygg-/insektsnett i begge ender</td></tr>
+    </table>
+
+    <table class="dims">
+      <tr><th colspan="2">TAK (fra innv. til utv.)</th></tr>
+      <tr><td>1</td><td>Innv. himling — osp (badstue) / furu (smørebod) 15 mm</td></tr>
+      <tr><td>2</td><td>Dampsperre — <strong>aluminiumsfolie</strong> (badstue) / PE-folie (smørebod)</td></tr>
+      <tr><td>3</td><td>Isolasjon — mineralull 148 mm i takbjelker</td></tr>
+      <tr><td>4</td><td><strong>Luftespalte 50 mm</strong> — over iso, under undertak</td></tr>
+      <tr><td>5</td><td><strong>Undertaksduk</strong> — diffusjonsåpen membran (fungerer som vind-/vannsperre)</td></tr>
+      <tr><td>6</td><td>Sløyfer — 23 mm langs takbjelkene</td></tr>
+      <tr><td>7</td><td>Taktro — furu 22 mm (solid underlag for shingel)</td></tr>
+      <tr><td>8</td><td>Underlagspapp — selvklebende bitumen</td></tr>
+      <tr><td>9</td><td>Taktekking — <strong>asfalt-shingel</strong></td></tr>
+      <tr><td colspan="2" style="background:#f4f7f0;"><strong>Total takkonstruksjon:</strong> ca. 265 mm</td></tr>
+      <tr><td colspan="2" style="background:#f4f7f0;"><strong>Lufting:</strong> innsug ved takfot bak (lav side), utsug ved øvre takkant foran (høy side), mygg-nett i begge åpninger. Vindskier har ventilerte åpninger</td></tr>
+    </table>
+  </div>
+
+  <div class="notes">
+    <strong>Overbygg-konstruksjon (rev. H):</strong><br>
+    • Tett nordvegg i bindingsverk 48×98, festet i hytteveggen i vest og i badstuens nordvestre hjørne i øst<br>
+    • Kontinuerlig takplan: takbjelker 48×148 fortsetter uforstyrret over overbygget (samme slope, høyest syd → lavest nord)<br>
+    • <strong>Sydside åpen uten post</strong>: fritt spenn 3 m over inngangssonen, båret av sydbjelke 2×48×198 C24 koblet (eller limtre GL28c 90×270). Bjelken bjeles innfelt mot hyttas østvegg og mot badstuens SV-hjørne<br>
+    • <strong>Gulv</strong>: eksisterende terrassebord — overbygget påfører ikke ny last på grunn<br>
+    • <strong>Feste mot hytta</strong>: vest-enden av sydbjelken og takkant avsluttes med beslag felt inn i hyttas kledning (vanntett overgang)<br>
+    • Vindavstivning mellom tett nordvegg og hytta gir lateral stabilitet
+  </div>
+</div>
+
+<!-- ============ ARK 2 — FASADER ============ -->
+<div class="sheet">
+  <div class="titleblock">
+    <h1>Badstue + overbygg — Fasader</h1>
+    <div class="meta">
+      <div>Byggherre: Trond Dahl</div>
+      <div>Tegn.nr: A-02 | Målestokk 1:50 (ca)</div>
+      <div>Rev: H | Dato: 2026-04-17</div>
+    </div>
+  </div>
+
+  <h2>Fasade — FRONT (syd) — inkl. overbygg og hytte-indikator</h2>
+  <div class="drawing">
+    <svg viewBox="0 0 1300 470" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#0a5ca8"/>
+        </marker>
+        <marker id="arrow2-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M10,0 L0,5 L10,10 z" fill="#0a5ca8"/>
+        </marker>
+        <!-- Stående tømmermannspanel: bred underbord + smalere overbord -->
+        <pattern id="cladding-h" patternUnits="userSpaceOnUse" width="30" height="20">
+          <rect width="30" height="20" fill="#d9b78a"/>
+          <line x1="0" y1="0" x2="0" y2="20" stroke="#6b4e26" stroke-width="1"/>
+          <rect x="13" y="0" width="6" height="20" fill="#c4a473" stroke="#6b4e26" stroke-width="0.5"/>
+        </pattern>
+      </defs>
+
+      <!-- Terreng -->
+      <path d="M 10 420 L 1290 420 L 1290 450 L 10 450 Z" class="ground"/>
+      <line x1="10" y1="420" x2="1290" y2="420" stroke="#222" stroke-width="1"/>
+
+      <!-- HYTTA (til venstre, forenklet) -->
+      <rect x="30" y="120" width="70" height="300" class="hytte"/>
+      <text x="65" y="260" class="label" text-anchor="middle" font-weight="bold" transform="rotate(-90, 65, 260)">HYTTA</text>
+
+      <!-- OVERBYGG (x=100..550): åpent, vi ser INN under taket -->
+      <!-- Sky-bakgrunn i "gjennomsiktig" del -->
+      <rect x="100" y="52" width="450" height="368" class="sky" opacity="0.3"/>
+
+      <!-- Sydbjelke synlig som solid bjelke langs taket (2x48x198 koblet) -->
+      <rect x="100" y="52" width="450" height="25" fill="#6b4e26" opacity="0.6"/>
+      <text x="325" y="70" class="label-small" text-anchor="middle" font-weight="bold" fill="#fff">Sydbjelke 2×48×198 — fritt spenn 3 m</text>
+
+      <!-- Overbygg-tak-kant (fra hytte vestvegg til badstue vestvegg) -->
+      <!-- Høy side foran = 245 cm utv = 367.5 px. Vegg y=52..420 -->
+      <polygon points="10,52 550,52 550,30 10,30" class="roof"/>
+      <line x1="10" y1="52" x2="550" y2="52" stroke="#222" stroke-width="1.5"/>
+
+      <!-- Badstuens vestvegg synlig bak overbygget -->
+      <rect x="550" y="52" width="19.5" height="368" fill="#b39f7a" stroke="#555" stroke-width="0.8" opacity="0.9"/>
+
+      <!-- Grunnmur (bare under badstue) -->
+      <rect x="555" y="420" width="694" height="25" fill="#999" stroke="#222" stroke-width="0.5" opacity="0"/>
+
+      <!-- BADSTUE front-vegg (x=550..1249). Utv veggh foran 245cm = 367.5 px. y=52..420 -->
+      <rect x="550" y="52" width="699" height="368" fill="url(#cladding-h)" stroke="#222" stroke-width="1.5"/>
+      <polygon points="550,52 1290,52 1290,30 550,30" class="roof"/>
+      <line x1="550" y1="52" x2="1290" y2="52" stroke="#222" stroke-width="1.5"/>
+
+      <!-- Ringmur under badstue -->
+      <rect x="545" y="420" width="709" height="15" fill="#999" stroke="#222" stroke-width="0.5"/>
+
+      <!-- Mellomvegg visuell (x=550+394.5=944.5, but cosmetic in fasade) -->
+      <line x1="977" y1="52" x2="977" y2="420" stroke="#8b6f4e" stroke-width="0.3" stroke-dasharray="2 3"/>
+
+      <!-- Vinduer i badstuens front (60×150, OK 30 cm under vegtopp, UK 650 mm over svill) -->
+      <!-- Vegg y=52..420. OK vindu: y=52+45=97. UK: y=97+225=322 -->
+      <!-- Smørebod-del av bygg x=550..977. Sentrum (550+977)/2 = 763.5. Vindu 60cm=90px: x=718.5..808.5 -->
+      <rect x="718.5" y="97" width="90" height="225" class="window"/>
+      <line x1="763.5" y1="97" x2="763.5" y2="322" stroke="#222" stroke-width="0.4"/>
+      <line x1="718.5" y1="209.5" x2="808.5" y2="209.5" stroke="#222" stroke-width="0.4"/>
+
+      <!-- Badstue-del x=977..1249. Sentrum (977+1249)/2 = 1113. Vindu x=1068..1158 -->
+      <rect x="1068" y="97" width="90" height="225" class="window"/>
+      <line x1="1113" y1="97" x2="1113" y2="322" stroke="#222" stroke-width="0.4"/>
+      <line x1="1068" y1="209.5" x2="1158" y2="209.5" stroke="#222" stroke-width="0.4"/>
+
+      <!-- Dimensjoner -->
+      <line x1="100" y1="432" x2="550" y2="432" class="dim" marker-start="url(#arrow2-start)" marker-end="url(#arrow2)"/>
+      <text x="325" y="444" class="dim-text" text-anchor="middle" font-weight="bold">3000 overbygg</text>
+      <line x1="550" y1="432" x2="1249" y2="432" class="dim" marker-start="url(#arrow2-start)" marker-end="url(#arrow2)"/>
+      <text x="899.5" y="444" class="dim-text" text-anchor="middle" font-weight="bold">4660 bygg</text>
+
+      <line x1="1265" y1="52" x2="1265" y2="420" class="dim" marker-start="url(#arrow2-start)" marker-end="url(#arrow2)"/>
+      <text x="1280" y="235" class="dim-text" text-anchor="middle" transform="rotate(-90, 1280, 235)">2450 vegg</text>
+
+      <text x="674.5" y="22" class="label" text-anchor="middle" font-weight="bold">FRONT — SYDFASADE</text>
+      <text x="325" y="252" class="label-small" text-anchor="middle" fill="#555" font-style="italic">(ser inn under overbygget)</text>
+      <text x="559" y="260" class="label-small" text-anchor="start" font-weight="bold" fill="#555" transform="rotate(-90, 559, 260)">badstuens vestvegg</text>
+    </svg>
+    <div class="caption">Fronten — fra venstre: hytta, overbygg 3 m (åpen med post i midten), badstue 4,66 m med 2 vinduer. Felles takslinje.</div>
+  </div>
+
+  <h2>Fasade — BAK (nord) — inkl. tett vegg på overbygg</h2>
+  <div class="drawing">
+    <svg viewBox="0 0 1300 370" xmlns="http://www.w3.org/2000/svg">
+      <!-- Utv veggh bak 202cm = 303 px. Vegg y=37..340. Terreng y=340 -->
+      <path d="M 10 340 L 1290 340 L 1290 370 L 10 370 Z" class="ground"/>
+      <line x1="10" y1="340" x2="1290" y2="340" stroke="#222" stroke-width="1"/>
+
+      <!-- Hytta indikator -->
+      <rect x="30" y="50" width="70" height="290" class="hytte"/>
+      <text x="65" y="195" class="label" text-anchor="middle" font-weight="bold" transform="rotate(-90, 65, 195)">HYTTA</text>
+
+      <!-- Overbygg tett nordvegg (x=100..550) -->
+      <rect x="100" y="37" width="450" height="303" fill="url(#cladding-h)" stroke="#222" stroke-width="1.5"/>
+
+      <!-- Mellomrom til badstue (null, de er direkte koblet) -->
+
+      <!-- Badstuens bakvegg (x=550..1249) -->
+      <rect x="550" y="37" width="699" height="303" fill="url(#cladding-h)" stroke="#222" stroke-width="1.5"/>
+
+      <!-- Grunnmur -->
+      <rect x="95" y="340" width="1159" height="15" fill="#999" stroke="#222" stroke-width="0.5"/>
+
+      <!-- Tak-linje -->
+      <polygon points="10,37 1290,37 1290,15 10,15" class="roof"/>
+      <line x1="10" y1="37" x2="1290" y2="37" stroke="#222" stroke-width="1.5"/>
+
+      <!-- Grense overbygg/badstue - bare en sub-markering -->
+      <line x1="550" y1="37" x2="550" y2="340" stroke="#555" stroke-width="0.3" stroke-dasharray="3 2"/>
+
+      <line x1="100" y1="352" x2="550" y2="352" class="dim" marker-start="url(#arrow2-start)" marker-end="url(#arrow2)"/>
+      <text x="325" y="364" class="dim-text" text-anchor="middle">3000</text>
+      <line x1="550" y1="352" x2="1249" y2="352" class="dim" marker-start="url(#arrow2-start)" marker-end="url(#arrow2)"/>
+      <text x="899.5" y="364" class="dim-text" text-anchor="middle">4660</text>
+
+      <line x1="1265" y1="37" x2="1265" y2="340" class="dim" marker-start="url(#arrow2-start)" marker-end="url(#arrow2)"/>
+      <text x="1280" y="190" class="dim-text" text-anchor="middle" transform="rotate(-90, 1280, 190)">2020 vegg</text>
+
+      <text x="674.5" y="7" class="label" text-anchor="middle" font-weight="bold">BAK — NORDFASADE</text>
+      <text x="325" y="190" class="label-small" text-anchor="middle" fill="#555">Tett overbygg-nordvegg</text>
+      <text x="899.5" y="190" class="label-small" text-anchor="middle" fill="#555">Tett badstue-bakvegg</text>
+    </svg>
+    <div class="caption">Bakfasaden — én lang tett vegg fra hytta til badstuens østhjørne (overbygg-nordvegg + badstue-bakvegg). Lavside av taket.</div>
+  </div>
+
+  <h2>Fasade — ØST (badstue østvegg, lukket)</h2>
+  <div class="drawing">
+    <svg viewBox="0 0 520 470" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 0 420 L 520 420 L 520 450 L 0 450 Z" class="ground"/>
+      <line x1="0" y1="420" x2="520" y2="420" stroke="#222" stroke-width="1"/>
+      <rect x="55" y="382" width="379" height="38" fill="#999" stroke="#222" stroke-width="1"/>
+
+      <!-- Bak til venstre, front til høyre (speilvendt for østfasade) -->
+      <polygon points="60,87 429,22 429,382 60,382" fill="url(#cladding-h)" stroke="#222" stroke-width="1.5"/>
+
+      <polygon points="15,0 489,-60 489,-38 15,22" class="roof"/>
+      <line x1="15" y1="22" x2="489" y2="-38" stroke="#222" stroke-width="1.5"/>
+
+      <path d="M 370 32 L 330 26" stroke="#a00" stroke-width="1" fill="none"/>
+      <path d="M 365 30 A 25 25 0 0 0 340 26" stroke="#a00" stroke-width="1" fill="none"/>
+      <text x="350" y="10" fill="#a00" font-size="13" font-weight="bold">10°</text>
+
+      <line x1="60" y1="435" x2="429" y2="435" class="dim" marker-start="url(#arrow2-start)" marker-end="url(#arrow2)"/>
+      <text x="244.5" y="447" class="dim-text" text-anchor="middle">2460 mm</text>
+
+      <line x1="30" y1="87" x2="30" y2="382" class="dim" marker-start="url(#arrow2-start)" marker-end="url(#arrow2)"/>
+      <text x="22" y="235" class="dim-text" text-anchor="middle" transform="rotate(-90, 22, 235)">2020</text>
+      <line x1="450" y1="22" x2="450" y2="382" class="dim" marker-start="url(#arrow2-start)" marker-end="url(#arrow2)"/>
+      <text x="468" y="205" class="dim-text" text-anchor="middle" transform="rotate(-90, 468, 205)">2450</text>
+
+      <text x="244" y="-5" class="label" text-anchor="middle" font-weight="bold">ØSTFASADE (badstue)</text>
+      <text x="100" y="370" class="label-small" text-anchor="middle">← BAK (lav)</text>
+      <text x="390" y="370" class="label-small" text-anchor="middle">FRONT (høy) →</text>
+      <text x="244" y="220" class="label-small" text-anchor="middle" fill="#777">Lukket</text>
+    </svg>
+    <div class="caption">Østfasade — badstuens lukkede kortvegg. Viser takfall 10° fra front til bak.</div>
+  </div>
+</div>
+
+<!-- ============ ARK 3 — SNITT + 3D ============ -->
+<div class="sheet">
+  <div class="titleblock">
+    <h1>Badstue + overbygg — Snitt og 3D</h1>
+    <div class="meta">
+      <div>Byggherre: Trond Dahl</div>
+      <div>Tegn.nr: A-03 | Målestokk 1:50 (ca)</div>
+      <div>Rev: H | Dato: 2026-04-17</div>
+    </div>
+  </div>
+
+  <h2>Snitt A-A — gjennom badstuen</h2>
+  <div class="drawing">
+    <svg viewBox="0 0 700 470" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 0 420 L 700 420 L 700 450 L 0 450 Z" class="ground"/>
+      <line x1="0" y1="420" x2="700" y2="420" stroke="#222" stroke-width="1"/>
+
+      <rect x="145" y="382" width="379" height="38" fill="#999" stroke="#222" stroke-width="1"/>
+
+      <rect x="500" y="14.5" width="19.5" height="367.5" class="hatch-wall"/>
+      <rect x="150" y="79" width="19.5" height="303" class="hatch-wall"/>
+
+      <rect x="150" y="382" width="370" height="15" fill="#c9a56b" stroke="#222" stroke-width="0.8"/>
+
+      <line x1="169.5" y1="82" x2="500" y2="22" stroke="#222" stroke-width="0.8" stroke-dasharray="3 2"/>
+
+      <polygon points="80,101 570,12 570,-10 80,79" class="roof"/>
+      <line x1="80" y1="101" x2="570" y2="12" stroke="#222" stroke-width="0.8"/>
+      <line x1="80" y1="79" x2="570" y2="-10" stroke="#222" stroke-width="1.5"/>
+
+      <polygon points="169.5,82 500,22 500,382 169.5,382" class="inner"/>
+
+      <rect x="169.5" y="315" width="180" height="67" class="bench-lower"/>
+      <text x="259" y="340" class="label-small" text-anchor="middle">Benk nede</text>
+      <text x="259" y="353" class="label-small" text-anchor="middle">120×45</text>
+
+      <rect x="169.5" y="232" width="90" height="8" class="bench-upper"/>
+      <line x1="255" y1="240" x2="255" y2="315" stroke="#6b4e26" stroke-width="3"/>
+      <text x="214" y="222" class="label-small" text-anchor="middle">Benk oppe (60 dyp, h 100)</text>
+
+      <g transform="translate(420,220)" opacity="0.25">
+        <circle cx="0" cy="0" r="12" fill="#000"/>
+        <rect x="-15" y="12" width="30" height="60" fill="#000"/>
+        <rect x="-20" y="72" width="40" height="90" fill="#000"/>
+        <text x="0" y="-18" font-size="9" fill="#555" text-anchor="middle">~175cm</text>
+      </g>
+
+      <rect x="450" y="312" width="35" height="70" class="stove"/>
+
+      <rect x="500" y="59.5" width="19.5" height="225" fill="#c8e0f0" stroke="#222" stroke-width="0.5" opacity="0.5"/>
+
+      <line x1="485" y1="22" x2="485" y2="382" class="dim" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+      <text x="475" y="210" class="dim-text" text-anchor="middle" transform="rotate(-90, 475, 210)">2400 innv</text>
+
+      <line x1="185" y1="82" x2="185" y2="382" class="dim" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+      <text x="200" y="230" class="dim-text" text-anchor="middle" transform="rotate(-90, 200, 230)">2010 innv</text>
+
+      <line x1="169.5" y1="435" x2="500" y2="435" class="dim" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+      <text x="335" y="448" class="dim-text" text-anchor="middle">2200 innv dybde</text>
+
+      <path d="M 450 9 L 498 17" stroke="#a00" stroke-width="1" fill="none"/>
+      <path d="M 455 11 A 25 25 0 0 1 490 16" stroke="#a00" stroke-width="1" fill="none"/>
+      <text x="465" y="0" fill="#a00" font-size="13" font-weight="bold">10°</text>
+
+      <text x="120" y="405" class="label-small">← BAK (nord, LAV)</text>
+      <text x="540" y="405" class="label-small">FRONT (syd, HØY) →</text>
+    </svg>
+    <div class="caption">Snitt A-A — gjennom badstuen. Takfall 10° fra høy front til lav bak.</div>
+  </div>
+
+  <h2>Snitt B-B — gjennom overbygget</h2>
+  <div class="drawing">
+    <svg viewBox="0 0 700 470" xmlns="http://www.w3.org/2000/svg">
+      <!-- Samme høyder som A-A, men overbygg har ingen gulv/innredning. -->
+      <!-- Front (høy) til høyre, bak (lav) til venstre. Åpen syd = åpen høyre, tett nord = vegg venstre. -->
+      <path d="M 0 420 L 700 420 L 700 450 L 0 450 Z" class="ground"/>
+      <line x1="0" y1="420" x2="700" y2="420" stroke="#222" stroke-width="1"/>
+
+      <!-- Tett nordvegg overbygg (venstre) - står på eksisterende terrasse -->
+      <rect x="150" y="79" width="19.5" height="321" class="hatch-wall"/>
+
+      <!-- EKSISTERENDE TERRASSEBORD - horisontalt brett -->
+      <rect x="150" y="400" width="415" height="8" fill="#c9a56b" stroke="#6b4e26" stroke-width="0.5"/>
+      <line x1="200" y1="400" x2="200" y2="408" stroke="#6b4e26" stroke-width="0.3"/>
+      <line x1="260" y1="400" x2="260" y2="408" stroke="#6b4e26" stroke-width="0.3"/>
+      <line x1="320" y1="400" x2="320" y2="408" stroke="#6b4e26" stroke-width="0.3"/>
+      <line x1="380" y1="400" x2="380" y2="408" stroke="#6b4e26" stroke-width="0.3"/>
+      <line x1="440" y1="400" x2="440" y2="408" stroke="#6b4e26" stroke-width="0.3"/>
+      <line x1="500" y1="400" x2="500" y2="408" stroke="#6b4e26" stroke-width="0.3"/>
+      <text x="360" y="419" class="label-small" text-anchor="middle" fill="#6b4e26">eksist. terrassebord (m/fundament under)</text>
+
+      <!-- SYDBJELKE 2x48x198 ved sydsiden (fri ende) - ingen post -->
+      <rect x="504" y="22" width="30" height="20" fill="#6b4e26" stroke="#222" stroke-width="0.8"/>
+      <text x="540" y="35" class="label-small" text-anchor="start" font-weight="bold" fill="#6b4e26">Sydbjelke 2×48×198</text>
+      <text x="540" y="47" class="label-small" text-anchor="start" fill="#6b4e26">(fritt spenn 3 m)</text>
+
+      <!-- Tak - fra nordvegg topp til post topp -->
+      <line x1="169.5" y1="82" x2="504" y2="22" stroke="#222" stroke-width="0.8" stroke-dasharray="3 2"/>
+      <polygon points="80,101 570,12 570,-10 80,79" class="roof"/>
+      <line x1="80" y1="101" x2="570" y2="12" stroke="#222" stroke-width="0.8"/>
+      <line x1="80" y1="79" x2="570" y2="-10" stroke="#222" stroke-width="1.5"/>
+
+      <!-- Person -->
+      <g transform="translate(350,290)" opacity="0.3">
+        <circle cx="0" cy="0" r="12" fill="#000"/>
+        <rect x="-15" y="12" width="30" height="60" fill="#000"/>
+        <rect x="-20" y="72" width="40" height="55" fill="#000"/>
+        <text x="0" y="-18" font-size="9" fill="#555" text-anchor="middle">~175cm</text>
+      </g>
+
+      <!-- Dimensjoner -->
+      <line x1="485" y1="22" x2="485" y2="400" class="dim" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+      <text x="472" y="210" class="dim-text" text-anchor="middle" transform="rotate(-90, 472, 210)">~2520 (fri h. ved syd)</text>
+
+      <line x1="185" y1="82" x2="185" y2="400" class="dim" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+      <text x="200" y="240" class="dim-text" text-anchor="middle" transform="rotate(-90, 200, 240)">~2130 (fri h. ved nord)</text>
+
+      <line x1="169.5" y1="435" x2="519.5" y2="435" class="dim" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+      <text x="345" y="448" class="dim-text" text-anchor="middle">2460 (åpen gangbredde, uten post)</text>
+
+      <path d="M 454 9 L 502 17" stroke="#a00" stroke-width="1" fill="none"/>
+      <path d="M 459 11 A 25 25 0 0 1 494 16" stroke="#a00" stroke-width="1" fill="none"/>
+      <text x="469" y="0" fill="#a00" font-size="13" font-weight="bold">10°</text>
+
+      <text x="185" y="110" class="label-small" text-anchor="start">Tett nordvegg →</text>
+
+      <text x="120" y="390" class="label-small">← BAK (nord)</text>
+      <text x="555" y="390" class="label-small">FRONT (syd, åpen) →</text>
+    </svg>
+    <div class="caption">Snitt B-B — gjennom overbygget. God høyde til å gå under (2,25 m ved nordvegg, 2,65 m ved post).</div>
+  </div>
+
+  <h2>Detalj D — Gulvoppbygging (lag for lag)</h2>
+  <div class="drawing">
+    <svg viewBox="0 0 880 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="iso-floor" patternUnits="userSpaceOnUse" width="16" height="14">
+          <rect width="16" height="14" fill="#f6e8a8"/>
+          <path d="M0,7 Q4,1 8,7 T16,7" stroke="#d6b94a" stroke-width="0.8" fill="none"/>
+        </pattern>
+      </defs>
+
+      <!-- Floor section: x=160..520 -->
+      <!-- 10. Innegulv -->
+      <rect x="160" y="80" width="360" height="23" fill="#e8d5b0" stroke="#222" stroke-width="1"/>
+      <line x1="210" y1="80" x2="210" y2="103" stroke="#c4a06a" stroke-width="0.6"/>
+      <line x1="280" y1="80" x2="280" y2="103" stroke="#c4a06a" stroke-width="0.6"/>
+      <line x1="350" y1="80" x2="350" y2="103" stroke="#c4a06a" stroke-width="0.6"/>
+      <line x1="420" y1="80" x2="420" y2="103" stroke="#c4a06a" stroke-width="0.6"/>
+      <line x1="470" y1="80" x2="470" y2="103" stroke="#c4a06a" stroke-width="0.6"/>
+
+      <!-- 9. Sponplate -->
+      <rect x="160" y="103" width="360" height="18" fill="#d9b78a" stroke="#222" stroke-width="1"/>
+
+      <!-- 8. Dampsperre -->
+      <rect x="160" y="121" width="360" height="5" fill="#cc3333" stroke="#a52222" stroke-width="0.5"/>
+
+      <!-- 7. Krysslekt + iso 48 -->
+      <rect x="160" y="126" width="360" height="32" fill="url(#iso-floor)" stroke="#222" stroke-width="1"/>
+      <rect x="225" y="126" width="22" height="32" fill="#c9a56b" stroke="#6b4e26" stroke-width="0.8"/>
+      <rect x="370" y="126" width="22" height="32" fill="#c9a56b" stroke="#6b4e26" stroke-width="0.8"/>
+
+      <!-- 6+3. Gulvbjelker + iso 148 -->
+      <rect x="160" y="158" width="360" height="98" fill="url(#iso-floor)" stroke="#222" stroke-width="1"/>
+      <!-- 2 gulvbjelker i snitt -->
+      <rect x="172" y="158" width="30" height="98" fill="#c9a56b" stroke="#6b4e26" stroke-width="1"/>
+      <rect x="478" y="158" width="30" height="98" fill="#c9a56b" stroke="#6b4e26" stroke-width="1"/>
+      <text x="187" y="212" class="label-small" text-anchor="middle" transform="rotate(-90,187,212)">48×148</text>
+      <text x="493" y="212" class="label-small" text-anchor="middle" transform="rotate(-90,493,212)">48×148</text>
+      <text x="340" y="210" class="label-small" text-anchor="middle">mineralull 148 mm</text>
+
+      <!-- 4. Vindsperre underside -->
+      <line x1="155" y1="258" x2="525" y2="258" stroke="#0a5ca8" stroke-width="2.5" stroke-dasharray="7 3"/>
+
+      <!-- 5. Holdelekter under bjelkene -->
+      <rect x="172" y="258" width="30" height="9" fill="#a8895a" stroke="#6b4e26" stroke-width="0.6"/>
+      <rect x="478" y="258" width="30" height="9" fill="#a8895a" stroke="#6b4e26" stroke-width="0.6"/>
+      <line x1="155" y1="267" x2="525" y2="267" stroke="#7a8a6a" stroke-width="1.5" stroke-dasharray="2 2"/>
+
+      <!-- 2. Svill (ved pilar) -->
+      <rect x="270" y="278" width="150" height="33" fill="#8b6f4e" stroke="#222" stroke-width="1"/>
+      <line x1="270" y1="280" x2="420" y2="280" stroke="#5a3f1a" stroke-width="2"/>
+      <text x="345" y="299" class="label-small" text-anchor="middle" fill="#fff">Svill 48×148 (ligger flatt)</text>
+
+      <!-- 1. Pilar -->
+      <rect x="305" y="311" width="80" height="120" fill="#999" stroke="#222" stroke-width="1.2"/>
+      <line x1="320" y1="311" x2="320" y2="431" stroke="#777" stroke-width="0.5"/>
+      <line x1="345" y1="311" x2="345" y2="431" stroke="#777" stroke-width="0.5"/>
+      <line x1="370" y1="311" x2="370" y2="431" stroke="#777" stroke-width="0.5"/>
+      <text x="345" y="375" class="label-small" text-anchor="middle" fill="#fff">Pilar</text>
+
+      <!-- Kryperom-pil -->
+      <text x="210" y="340" class="label-small" text-anchor="middle" fill="#0a5ca8">ventilert</text>
+      <text x="210" y="353" class="label-small" text-anchor="middle" fill="#0a5ca8">kryperom</text>
+      <path d="M 175 365 L 250 365" stroke="#0a5ca8" stroke-width="1" fill="none" stroke-dasharray="3 2"/>
+      <text x="470" y="340" class="label-small" text-anchor="middle" fill="#0a5ca8">luft</text>
+      <path d="M 440 365 L 500 365" stroke="#0a5ca8" stroke-width="1" fill="none" stroke-dasharray="3 2"/>
+
+      <!-- Nummererte callouts (1-10 nedenfra) med leder-linjer til høyre -->
+      <!-- Number circles on the section -->
+      <g font-family="Arial" font-size="11" font-weight="bold">
+        <circle cx="345" cy="420" r="11" fill="#2c3e50"/><text x="345" y="424" fill="#fff" text-anchor="middle">1</text>
+        <circle cx="408" cy="294" r="11" fill="#2c3e50"/><text x="408" y="298" fill="#fff" text-anchor="middle">2</text>
+        <circle cx="535" cy="207" r="11" fill="#2c3e50"/><text x="535" y="211" fill="#fff" text-anchor="middle">3</text>
+        <circle cx="138" cy="258" r="11" fill="#2c3e50"/><text x="138" y="262" fill="#fff" text-anchor="middle">4</text>
+        <circle cx="535" cy="262" r="11" fill="#2c3e50"/><text x="535" y="266" fill="#fff" text-anchor="middle">5</text>
+        <circle cx="340" cy="232" r="11" fill="#2c3e50"/><text x="340" y="236" fill="#fff" text-anchor="middle">6</text>
+        <circle cx="535" cy="142" r="11" fill="#2c3e50"/><text x="535" y="146" fill="#fff" text-anchor="middle">7</text>
+        <circle cx="535" cy="123" r="11" fill="#2c3e50"/><text x="535" y="127" fill="#fff" text-anchor="middle">8</text>
+        <circle cx="535" cy="112" r="11" fill="#2c3e50"/><text x="535" y="116" fill="#fff" text-anchor="middle">9</text>
+        <circle cx="535" cy="91" r="11" fill="#2c3e50"/><text x="535" y="95" fill="#fff" text-anchor="middle">10</text>
+      </g>
+
+      <!-- Forklaringsliste -->
+      <g font-family="Arial" font-size="11.5" fill="#222">
+        <text x="585" y="78" font-weight="bold">10  Innegulv — tregulv 28 mm (smørebod) /</text>
+        <text x="608" y="93">fliser m. membran el. trerist (badstue)</text>
+        <text x="585" y="113" font-weight="bold">9  Undergulv — sponplate 22 mm (P5/P6)</text>
+        <text x="585" y="133" font-weight="bold">8  Dampsperre — PE-folie 0,15 mm</text>
+        <text x="608" y="148">opp 15–20 cm langs vegg, teipet</text>
+        <text x="585" y="168" font-weight="bold">7  Krysslekt 48 mm + isolasjon 48 mm</text>
+        <text x="608" y="183">bryter kuldebro gjennom bjelkene</text>
+        <text x="585" y="203" font-weight="bold">6  Isolasjon 148 mm — mineralull</text>
+        <text x="608" y="218">tett mellom gulvbjelkene</text>
+        <text x="585" y="238" font-weight="bold">5  Holdelekter 23×48 — holder isolasjon</text>
+        <text x="585" y="258" font-weight="bold">4  Musebånd + vindsperre på undersiden</text>
+        <text x="608" y="273">stopper kald trekk fra kryperommet</text>
+        <text x="585" y="293" font-weight="bold">3  Gulvbjelker 48×148 C24, c/c 600 mm</text>
+        <text x="585" y="313" font-weight="bold">2  Svill 48×148 trykkimpr. + fuktsperre</text>
+        <text x="608" y="328">mot betong</text>
+        <text x="585" y="348" font-weight="bold">1  Pilar — betong (6 stk)</text>
+      </g>
+
+      <!-- Leder-linjer -->
+      <g stroke="#888" stroke-width="0.7" fill="none">
+        <line x1="546" y1="91" x2="582" y2="74"/>
+        <line x1="546" y1="112" x2="582" y2="109"/>
+        <line x1="546" y1="123" x2="582" y2="129"/>
+        <line x1="546" y1="142" x2="582" y2="164"/>
+        <line x1="351" y1="232" x2="582" y2="199"/>
+        <line x1="546" y1="207" x2="582" y2="234"/>
+        <line x1="546" y1="262" x2="582" y2="254"/>
+        <line x1="127" y1="258" x2="100" y2="258"/>
+        <line x1="419" y1="294" x2="582" y2="309"/>
+        <line x1="356" y1="420" x2="582" y2="344"/>
+      </g>
+
+      <text x="340" y="40" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">SNITT GJENNOM GULV — pilarfundament med ventilert kryperom</text>
+      <text x="340" y="58" font-family="Arial" font-size="10" fill="#555" text-anchor="middle">Ikke i målestokk — lagene vist forstørret for tydelighet</text>
+    </svg>
+    <div class="caption">Gulvoppbygging fra pilar til innegulv. Dampsperren (rød) ligger på varm side og kobles til veggens dampsperre. Vindsperren (blå) under bjelkene stopper kald trekk fra kryperommet.</div>
+  </div>
+
+  <h2>3D — Isometrisk perspektiv (sydvest)</h2>
+  <div class="drawing">
+    <svg viewBox="0 0 900 480" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#a6cde4"/>
+          <stop offset="100%" stop-color="#e8f2f8"/>
+        </linearGradient>
+        <!-- Stående panel front (3D) -->
+        <pattern id="cladding-iso" patternUnits="userSpaceOnUse" width="22" height="16">
+          <rect width="22" height="16" fill="#d9b78a"/>
+          <line x1="0" y1="0" x2="0" y2="16" stroke="#6b4e26" stroke-width="0.8"/>
+          <rect x="9" y="0" width="4" height="16" fill="#c4a473"/>
+        </pattern>
+        <!-- Stående panel side (3D) -->
+        <pattern id="cladding-iso-side" patternUnits="userSpaceOnUse" width="22" height="16">
+          <rect width="22" height="16" fill="#c9a87a"/>
+          <line x1="0" y1="0" x2="0" y2="16" stroke="#5a3f1a" stroke-width="0.8"/>
+          <rect x="9" y="0" width="4" height="16" fill="#b89262"/>
+        </pattern>
+      </defs>
+
+      <rect x="0" y="0" width="900" height="380" fill="url(#sky)"/>
+      <path d="M 0 380 L 900 380 L 900 480 L 0 480 Z" class="ground"/>
+
+      <!-- Skala 0.8. Dybde dx=-85 dy=-49.
+           H_front = 245*0.8 = 196, H_bak = 202*0.8 = 162.
+
+           Badstue:
+           fvn (frontvenstre) = (380, 380)
+           fhn = (380+373, 380) = (753, 380)
+           bvn = (380-85, 380-49) = (295, 331)
+           bhn = (753-85, 380-49) = (668, 331)
+           front top: y=380-196=184
+           bak top: y=331-162=169
+
+           Overbygg 3 m = 240 px vest for badstue.
+           Overbygg fronts (south posts/edge):
+           ov-SW (post ved hytte): (380-240, 380) = (140, 380)
+           ov-SE (ved badstue SW): (380, 380)
+           ov-NW (bak ved hytte): (140-85, 331) = (55, 331)
+           ov-NE (bak ved badstue): (295, 331)
+           Overbygg tops: samme som badstue (same slope), post-topper y=184, nordvegg topp y=169 -->
+
+      <!-- HYTTE (til venstre) -->
+      <polygon points="55,331 55,380 140,380 140,331" fill="#c9b890" stroke="#8b6f4e" stroke-width="1.5" opacity="0.9"/>
+      <polygon points="10,380 55,380 55,331 10,331" fill="#b8a880" stroke="#8b6f4e" stroke-width="1.5" opacity="0.9"/>
+      <polygon points="10,331 55,331 140,331 140,100 10,100" fill="#b8a880" stroke="#8b6f4e" stroke-width="1.5" opacity="0.9"/>
+      <text x="75" y="420" class="label" text-anchor="middle" font-weight="bold" fill="#444">HYTTA</text>
+
+      <!-- OVERBYGG - tett nordvegg -->
+      <polygon points="55,331 295,331 295,169 55,169" fill="url(#cladding-iso)" stroke="#222" stroke-width="1.5"/>
+
+      <!-- SYDBJELKE 2x48x198 (ingen post) - vises som mørk bjelke ved overbygg-fronten -->
+      <line x1="140" y1="184" x2="380" y2="184" stroke="#6b4e26" stroke-width="6"/>
+
+      <!-- Badstue - venstre sidevegg (vestvegg, synlig) -->
+      <polygon points="380,380 295,331 295,169 380,184" fill="url(#cladding-iso-side)" stroke="#222" stroke-width="1.5"/>
+
+      <!-- Badstue - front (sydvegg) -->
+      <polygon points="380,380 753,380 753,184 380,184" fill="url(#cladding-iso)" stroke="#222" stroke-width="1.5"/>
+
+      <!-- Takplate - kontinuerlig fra bakre-venstre (overbygg) til bakre-høyre (badstue bak), front-høyre, front-venstre (hytte) -->
+      <!-- Takkant med utstikk (forenklet +/-12 px)
+           Hele takflaten: topp av nordvegg til topp av front-vegg, inkluderer overbygg -->
+      <!-- Tak underside corners: NW (55,169), NE (668,169), FE (753,184), FW (140,184) -->
+      <polygon points="55,169 668,169 753,184 140,184" fill="#8b6f4e" stroke="#222" stroke-width="1.5"/>
+      <!-- Tak-overside 12 px up -->
+      <polygon points="55,157 668,157 753,172 140,172" fill="#a08460" stroke="#222" stroke-width="1.2"/>
+      <!-- Tak edge venstre og front -->
+      <polygon points="55,169 55,157 140,172 140,184" fill="#6b4e26" stroke="#222" stroke-width="0.8"/>
+      <polygon points="140,184 753,184 753,172 140,172" fill="#6b4e26" stroke="#222" stroke-width="0.8"/>
+
+      <!-- Ytterdør i badstues vestvegg (inni overbygget) -->
+      <polygon points="344,359 312,341 312,199 344,217" fill="#8b5a2b" stroke="#222" stroke-width="1"/>
+      <polygon points="347,356 315,338 315,202 347,220" fill="none" stroke="#5a3a1a" stroke-width="0.4"/>
+      <circle cx="318" cy="282" r="2" fill="#c9a56b"/>
+
+      <!-- Vinduer i front badstue (60×150) -->
+      <rect x="463" y="208" width="48" height="120" class="window"/>
+      <line x1="487" y1="208" x2="487" y2="328" stroke="#222" stroke-width="0.4"/>
+      <rect x="650" y="208" width="48" height="120" class="window"/>
+      <line x1="674" y1="208" x2="674" y2="328" stroke="#222" stroke-width="0.4"/>
+
+      <!-- Trær -->
+      <g opacity="0.5">
+        <ellipse cx="810" cy="340" rx="22" ry="32" fill="#5a8a4a"/>
+        <rect x="807" y="340" width="6" height="50" fill="#6b4e26"/>
+      </g>
+
+      <!-- Labels -->
+      <text x="450" y="30" class="label" text-anchor="middle" font-weight="bold" font-size="18">3D PERSPEKTIV — fra sydvest</text>
+      <text x="175" y="200" class="label-small" text-anchor="middle" fill="#444">OVERBYGG</text>
+      <text x="175" y="215" class="label-small" text-anchor="middle" fill="#444">(åpen syd, tett nord)</text>
+      <text x="560" y="400" class="label-small" text-anchor="middle" font-weight="bold">BADSTUE</text>
+
+      <path d="M 610 157 L 680 135" stroke="#a00" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+      <text x="685" y="130" fill="#a00" font-size="12" font-weight="bold">Fall 10° mot nord</text>
+    </svg>
+    <div class="caption">3D fra sydvest — hytta (t.v.), overbygg 3 m (åpent sør med post, tett nord), badstue 4,66 m (sydfasade + vestvegg synlig). Taket fortsetter som ett plan over hele.</div>
+  </div>
+
+  <div class="notes">
+    <strong>Rev. H — oppsummering:</strong><br>
+    • Takfall 10°: høyest front (240 cm innv.), lavest bak (201 cm innv.)<br>
+    • <strong>Overbygg 3 m vest</strong> uten post: sydbjelke 2×48×198 C24 koblet bærer 3 m fritt spenn<br>
+    • Takbjelker 48×148 C24 c/c 500 — ett kontinuerlig takplan<br>
+    • <strong>Ovn i SE-hjørne</strong> av badstuen (høyre-framre hjørne)<br>
+    • <strong>Utv. kledning</strong>: stående tømmermannspanel 22 mm<br>
+    • <strong>Taktekking</strong>: asfalt-shingel på taktro<br>
+    • <strong>Vindsperre</strong> (9 mm vindtettplate) + <strong>23 mm klimaspalte</strong> (horisontale lekter) — lufting av vegg<br>
+    • <strong>Undertaksduk</strong> (diffusjonsåpen) + <strong>50 mm luftespalte</strong> + sløyfer/taktro — lufting av tak<br>
+    • <strong>Dampsperre</strong> innvendig: aluminiumsfolie i badstuen, PE-folie i smørebod<br>
+    • Takutstikk 300 mm foran/bak, vindskier 400 mm på sidene<br>
+    • 6 støpte sokler totalt — bare under badstuebygget<br>
+    <br>
+    Klar for materialberegning — skal vi starte med fundament + sviller?
+  </div>
+</div>
+
+</body>
+</html>
