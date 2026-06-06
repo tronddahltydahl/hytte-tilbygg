@@ -196,6 +196,10 @@ export const hytte: Boks = {
     // Inngangsdør på den indre bakveggen av innhugget — bunn på terrassenivå
     // så den ikke stikker under gulvet i 3D-visningen. Oker-gul farge.
     { type: "dor", vegg: "innhugg-bak", avstand: 0.55, bredde: 0.9, hoyde: 2.05, bunn: 0.3, farge: "#c89a3a" },
+    // 80×80 vindu på høyre gavelvegg, rett rundt hjørnet (z=4) fra den gule
+    // inngangsdøra. Sitter på den frie delen av gavlen, utenfor tilbygget
+    // (som slutter ved z=2.7). avstand måles fra bakkanten (z=0).
+    { type: "vindu", vegg: "hoyre", avstand: 3.0, bredde: 0.8, hoyde: 0.8, bunn: 1.0 },
   ],
 };
 
